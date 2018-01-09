@@ -50,66 +50,26 @@ resource "oci_core_route_table" "PrivateRouteTable" {
     compartment_id = "${var.compartment_ocid}"
     vcn_id = "${oci_core_virtual_network.CompleteVCN.id}"
     display_name = "PrivateRouteTable"
-    route_rules {
-        cidr_block = "0.0.0.0/0"
-        network_entity_id = "${oci_core_private_ip.NatInstancePrivateIP.id}"
-    }
-    
+   
      route_rules {
         cidr_block="192.168.0.0/16"
         network_entity_id="ocid1.localpeeringgateway.oc1.iad.aaaaaaaai5zki6i47u4iz3lq7f3d6tf6jngph2xjadcgqznrk4mvijj7tvba"
     }
-
+    
+     route_rules {
+        cidr_block = "0.0.0.0/0"
+        network_entity_id = "${oci_core_private_ip.NatInstancePrivateIP.id}"
+    }
+ 
 
 }
 
 /*
 
-output "bastion_subnet_ids" {
-  value   = ["${oci_core_subnet.BastionSubnetAD1.id}", "${oci_core_subnet.BastionSubnetAD2.id}","${oci_core_subnet.BastionSubnetAD3.id}"]
-}
-output "public_subnet_ids" {
-  value   = ["${oci_core_subnet.WebSubnetAD1.id}", "${oci_core_subnet.WebSubnetAD2.id}","${oci_core_subnet.WebSubnetAD3.id}"]
-}
-
 output "private_subnet_ids" {
 
-   value = ["${oci_core_subnet.PrivateSubnetAD1.id}", "${oci_core_subnet.PrivateSubnetAD2.id}","${oci_core_subnet.PrivateSubnetAD3.id}"]
+   value = ["${oci_core_subnet.PrivateSubnets.*.id}"]
 
 }
-
-output "data_sources" {
-  value = "${data.oci_core_subnets.sub.subnets}"
-}
-
-output "nic_info" {
-   value = "${data.oci_core_vnic_attachments.NatInstanceVnics.vnic_attachments}"
-}
-
-output "data_source_test" {
-  value = ["${data.oci_core_subnets.sub.id}"]
-}
-
-
-output "data_source_info0" {
-  value = "${data.oci_core_subnets.sub.subnets.0.id}"
-
-}
-
-output "data_source_info1" {
-  value = "${data.oci_core_subnets.sub.subnets.1.id}"
-
-}
-
-output "data_source_info2" {
-
-  value = "${data.oci_core_subnets.sub.subnets.2.id}"
-
-}
-
-output "private_ip_nat" {
-  value= "${oci_core_private_ip.NatInstancePrivateIP}"
-}
-
 
 */
