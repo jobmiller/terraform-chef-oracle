@@ -4,11 +4,11 @@ resource "oci_core_instance" "DBServers" {
         count=1
         availability_domain = "${lookup(data.oci_core_subnets.DBsub.subnets[count.index],"availability_domain")}"
         compartment_id = "${var.compartment_ocid}"
-	image = "${lookup(data.oci_core_images.OLImageOCID.images[0], "id")}"
+	      image = "${lookup(data.oci_core_images.OLImageOCID.images[0], "id")}"
         shape = "${var.InstanceShape}"
 #       user_data = "${base64encode(file(var.BootStrapFile))}"
-	display_name="DB-OEL-${count.index}"
-	hostname_label="DB-OEL-${count.index}"
+	      display_name="DB-OEL-${count.index}"
+	      hostname_label="DB-OEL-${count.index}"
 
 
 	# Optional
@@ -19,16 +19,13 @@ resource "oci_core_instance" "DBServers" {
 		#Optional
 		assign_public_ip = false
 		display_name = "vnic-${count.index}"
-		#hostname_label = "${var.create_vnic_details_hostname_label}"
-		#private_ip = "${var.create_vnic_details_private_ip}"
-		#skip_source_dest_check = "${var.create_vnic_details_skip_source_dest_check}"
-	}
+			}
 
 	metadata {
 		ssh_authorized_keys = "${var.ssh_public_key}"
+		#This user data script adds chef server dns entry to /etc/hosts
 		user_data = "${base64encode(file("user_data_dns.tpl"))}"
- 
-	}
+ 	}
 
 provisioner "chef" {
     server_url = "${var.chef_server}"
@@ -39,7 +36,7 @@ provisioner "chef" {
     recreate_client = true
     fetch_chef_certificates = true
     connection {
-      host = "${oci_core_instance.DBServers.0.private_ip}"
+      host = "${oci_core_instance.DBServers.[count.index].private_ip}"
       type = "ssh"
       user = "opc"
       private_key = "${var.ssh_private_key}"
