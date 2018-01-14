@@ -1,7 +1,7 @@
 
 resource "oci_core_instance" "DBServers" {
 	#Required
-        count=3
+        count=1
         availability_domain = "${lookup(data.oci_core_subnets.DBsub.subnets[count.index],"availability_domain")}"
         compartment_id = "${var.compartment_ocid}"
 	image = "ocid1.image.oc1.iad.aaaaaaaaxrqeombwty6jyqgk3fraczdd63bv66xgfsqka4ktr7c57awr3p5a"
@@ -26,10 +26,11 @@ resource "oci_core_instance" "DBServers" {
 		user_data = "${base64encode(file("user_data_dns.tpl"))}"
  	}
 
+
 provisioner "chef" {
     server_url = "${var.chef_server}"
-    node_name = "DB-OEL-${count.index}"
-    run_list = "${var.chef_recipes}"
+    node_name ="DB-OEL-${count.index}"
+    run_list =["role[oracle_database_12102]"]
     user_name = "${var.chef_user}"
     user_key = "${file(var.chef_key)}"
     recreate_client = true
@@ -42,11 +43,4 @@ provisioner "chef" {
       timeout = "3m"
     }
   }
-
-  #You will need knife.rb in your current path in order for this command to complete successfully.
-  #provisioner "local-exec" {
-  #  when = "destroy"
-  #  on_failure = "continue"
-  #  command = "knife node delete ${var.chef_node_name} -y",
-  #}
 }
