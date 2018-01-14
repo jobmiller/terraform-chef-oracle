@@ -75,7 +75,7 @@ resource "oci_core_instance" "NatInstance" {
     availability_domain = "${lookup(data.oci_identity_availability_domains.ADs.availability_domains[var.AD - 1],"name")}"
     compartment_id = "${var.compartment_ocid}"
     display_name = "NatInstance"
-    image = "${lookup(data.oci_core_images.OLImageOCID.images[0], "id")}"
+    image = "ocid1.image.oc1.iad.aaaaaaaaxrqeombwty6jyqgk3fraczdd63bv66xgfsqka4ktr7c57awr3p5a"
     shape = "${var.InstanceShape}"
     create_vnic_details {
         subnet_id = "${oci_core_subnet.MgmtSubnet.id}"

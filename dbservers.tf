@@ -1,14 +1,13 @@
 
 resource "oci_core_instance" "DBServers" {
 	#Required
-        count=1
+        count=3
         availability_domain = "${lookup(data.oci_core_subnets.DBsub.subnets[count.index],"availability_domain")}"
         compartment_id = "${var.compartment_ocid}"
-	      image = "${lookup(data.oci_core_images.OLImageOCID.images[0], "id")}"
+	image = "ocid1.image.oc1.iad.aaaaaaaaxrqeombwty6jyqgk3fraczdd63bv66xgfsqka4ktr7c57awr3p5a"
         shape = "${var.InstanceShape}"
-#       user_data = "${base64encode(file(var.BootStrapFile))}"
-	      display_name="DB-OEL-${count.index}"
-	      hostname_label="DB-OEL-${count.index}"
+	display_name="DB-OEL-${count.index}"
+	hostname_label="DB-OEL-${count.index}"
 
 
 	# Optional
@@ -36,7 +35,7 @@ provisioner "chef" {
     recreate_client = true
     fetch_chef_certificates = true
     connection {
-      host = "${oci_core_instance.DBServers.[count.index].private_ip}"
+      host = "${self.private_ip}"
       type = "ssh"
       user = "opc"
       private_key = "${var.ssh_private_key}"

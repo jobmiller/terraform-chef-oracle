@@ -2,7 +2,7 @@ resource "oci_core_subnet" "PrivateSubnets" {
   count=3
   availability_domain = "${lookup(data.oci_identity_availability_domains.ADs.availability_domains[count.index],"name")}"
   cidr_block = "10.0.${count.index+4}.0/24"
-  display_name = "WebSubnetAD-${count.index+1}"
+  display_name = "PrivateSubnetAD-${count.index+1}"
   compartment_id = "${var.compartment_ocid}"
   vcn_id = "${oci_core_virtual_network.CompleteVCN.id}"
   route_table_id = "${oci_core_route_table.PrivateRouteTable.id}"

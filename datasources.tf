@@ -34,7 +34,6 @@ data "oci_core_subnets" "DBsub" {
      values=["\\w*Private\\w*"]
      regex=true
     }
-depends_on = ["oci_core_subnet.PrivateSubnetAD1", "oci_core_subnet.PrivateSubnetAD2","oci_core_subnet.PrivateSubnetAD3"]
 
 }
 

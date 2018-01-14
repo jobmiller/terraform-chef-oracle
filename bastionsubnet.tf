@@ -1,4 +1,5 @@
 resource "oci_core_subnet" "BastionSubnet" {
+  count=3
   availability_domain = "${lookup(data.oci_identity_availability_domains.ADs.availability_domains[count.index],"name")}"
   cidr_block = "10.0.${count.index+7}.0/24"
   display_name = "BastionSubnetAD-${count.index+1}"
