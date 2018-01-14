@@ -17,7 +17,15 @@ resource "oci_core_security_list" "WebSubnet" {
 	{
 	protocol = "6"
 	source = "${var.VPC-CIDR}"
-    }]
+    },
+       {
+        protocol="6"
+	source = "${var.VPC-Utilities-Peer-CIDR}"
+        tcp_options {
+                "min" = 22
+                "max" = 22
+        }
+      }]
 }
 
 resource "oci_core_security_list" "PrivateSubnet" {
