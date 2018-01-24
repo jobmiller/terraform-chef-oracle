@@ -27,21 +27,6 @@ default['oracle']['psu_installer_zip']						= 'p16619894_10205_Linux-x86-64.zip'
 default['oracle']['psu_patch_number']						= '16619894'
 
 
-#10gR2 specific 
-default['oracle']['oracle_home']                                                = "#{default['oracle']['oracle_base']}/product/10.2.0/dbhome_1"
-default['oracle']['oracle_home_name']                                           = 'OraDb10g_home1'
-
-
-#11gR2 specifc
-default['oracle']['db_installer_zip_11g']                                        = ['p13390677_112040_Linux-x86-64_1of7.zip','p13390677_112040_Linux-x86-64_2of7.zip']
-default['oracle']['opatch_installer_zip_11g']                                       = 'p6880880_112000_Linux-x86-64.zip'
-default['oracle']['psu_installer_zip_11g']                                     = ['p20299013_112040_Linux-x86-64.zip','p20406239_112040_Linux-x86-64.zip']
-default['oracle']['psu_base_patch_number_11g']                                      = '20834538'
-default['oracle']['psu_patch_number_11g']                                           = ['20299013','20406239']
-default['oracle']['oracle_home_11g']                                                = "#{default['oracle']['oracle_base']}/product/11.2.0/dbhome_1"
-
-
-
 #12cR1 specific
 default['oracle']['db_installer_zip_12c']                                        = ['p17694377_121020_Linux-x86-64_1of8.zip','p17694377_121020_Linux-x86-64_2of8.zip']
 default['oracle']['opatch_installer_zip_12c']                                       = 'p6880880_122010_Linux-x86-64.zip'
