@@ -1,0 +1,26 @@
+### Authentication details
+export TF_VAR_tenancy_ocid="ocid1.tenancy.oc1..aaaaaaaalmi4utl6vf72psqgib363xonysnftrnuifedqiurqawicn63kh6a"
+export TF_VAR_user_ocid="ocid1.user.oc1..aaaaaaaas6e3asslebvf7hiqspgjwlhh743zqbpanimsjtgbliyv7yucuwdq"
+export TF_VAR_fingerprint="f9:e9:0d:23:72:eb:51:ff:e9:90:b1:01:86:99:c4:1a"
+export TF_VAR_private_key_path='/home/opc/terraform/oci_api_key.pem' 
+
+### Compartment
+export TF_VAR_compartment_ocid="ocid1.compartment.oc1..aaaaaaaaavbesgmi32l7zeveyfdgqa7mejbivqplt66mqo6wzml3oqhcj7ua"
+
+### Public/private keys used on the instance
+export TF_VAR_ssh_public_key=$(cat /home/opc/.ssh/terraform.pub)
+export TF_VAR_ssh_private_key=$(cat /home/opc/.ssh/TFKeyTest.pem)
+
+### Choose a subnet that exists in the AD and compartment you are launching the instance in
+export TF_VAR_region="us-ashburn-1"
+
+##Chef Configuration Info
+export TF_VAR_chef_user="jobmiller"
+export TF_VAR_chef_key='/home/opc/learn-chef/.chef/jobmiller.pem'
+#export TF_VAR_chef_node_name="node7"
+export TF_VAR_chef_server="https://chefserver.pubsubnet.utilitiesvcn.oraclevcn.com/organizations/ecateam" 
+
+# Path to Chef SSL certificate
+# export TF_VAR_chef_recipes='["role[oracle_database_12102]"]'
+
+export TF_VAR_chef_recipes='["role[web]"]'
