@@ -13,7 +13,7 @@ resource "oci_core_instance" "WebServers" {
 	# Optional
 	create_vnic_details {
 		#Required (subnet_id may also be specified at the root level)
-		subnet_id = "${lookup(data.oci_core_subnets.Websub.subnets[count.index],"id")}"
+		subnet_id = "${oci_core_subnet.WebSubnets.*.id[count.index]}"
 
 		#Optional
 		display_name = "vnic-${count.index}"
