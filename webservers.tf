@@ -2,7 +2,8 @@
 resource "oci_core_instance" "WebServers" {
 	#Required
         count=3
-        availability_domain = "${lookup(data.oci_core_subnets.Websub.subnets[count.index],"availability_domain")}"
+        #availability_domain = "${lookup(data.oci_core_subnets.Websub.subnets[count.index],"availability_domain")}"
+         availability_domain = "${oci_core_subnet.WebSubnets.*.availability_domain[count.index]}"
         compartment_id = "${var.compartment_ocid}"
 	image = "ocid1.image.oc1.iad.aaaaaaaaxrqeombwty6jyqgk3fraczdd63bv66xgfsqka4ktr7c57awr3p5a"
         shape = "${var.InstanceShape}"
@@ -13,8 +14,9 @@ resource "oci_core_instance" "WebServers" {
 	# Optional
 	create_vnic_details {
 		#Required (subnet_id may also be specified at the root level)
-		subnet_id = "${oci_core_subnet.WebSubnets.*.id[count.index]}"
-
+		#subnet_id = "${oci_core_subnet.WebSubnets.*.id[count.index]}"
+		#subnet_id="${lookup(data.oci_core_subnets.Websub.subnets[count.index],"id")}"
+		subnet_id="${oci_core_subnet.WebSubnets.*.id[count.index]}"
 		#Optional
 		display_name = "vnic-${count.index}"
 			}

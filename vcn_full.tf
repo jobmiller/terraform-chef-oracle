@@ -36,11 +36,14 @@ resource "oci_core_route_table" "RouteForComplete" {
     vcn_id = "${oci_core_virtual_network.CompleteVCN.id}"
     display_name = "RouteTableForComplete"
     
-    route_rules {
+  /*
+   route_rules {
         cidr_block="192.168.0.0/16"
         network_entity_id="ocid1.localpeeringgateway.oc1.iad.aaaaaaaai5zki6i47u4iz3lq7f3d6tf6jngph2xjadcgqznrk4mvijj7tvba"
     }
-    route_rules {
+ 
+*/
+   route_rules {
         cidr_block = "0.0.0.0/0"
         network_entity_id = "${oci_core_internet_gateway.CompleteIG.id}"
     }
@@ -51,11 +54,11 @@ resource "oci_core_route_table" "PrivateRouteTable" {
     vcn_id = "${oci_core_virtual_network.CompleteVCN.id}"
     display_name = "PrivateRouteTable"
    
-     route_rules {
+/*     route_rules {
         cidr_block="192.168.0.0/16"
         network_entity_id="ocid1.localpeeringgateway.oc1.iad.aaaaaaaai5zki6i47u4iz3lq7f3d6tf6jngph2xjadcgqznrk4mvijj7tvba"
     }
-    
+*/    
      route_rules {
         cidr_block = "0.0.0.0/0"
         network_entity_id = "${oci_core_private_ip.NatInstancePrivateIP.id}"
