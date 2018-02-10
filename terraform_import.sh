@@ -1,2 +1,0 @@
-terraform import oci_core_virtual_network.CompleteVCN ocid1.vcn.oc1.iad.aaaaaaaan7g7ch36y7kb7guywzefsqconhsey6oarvjrc56j7ig6owb46pya
-
